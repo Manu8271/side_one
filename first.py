@@ -73,7 +73,7 @@ def evaluate_fitness(query, target_keywords):
 # Perform web search and scrape results
 def perform_search(query):
     """
-    Simulates an internet search by sending a GET request to a search engine (e.g., DuckDuckGo).
+    Simulates an internet search by sending a GET request to a search engine .
     """
     url = f"https://www.duckduckgo.com/?q={query}"
     headers = {"User-Agent": "Mozilla/5.0"}
