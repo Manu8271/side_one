@@ -1,62 +1,89 @@
-# import random
-# import string
-# from idlelib import query
+# # import random
+# # import string
+# # from idlelib import query
+# #
+# # import requests
+# # from bs4 import BeautifulSoup
+# #
+# # # Define fitness function: Evaluate the relevance of a search query
+# # def evaluate_fitness(query, target_keywords):
+# #     """
+# #     Fitness is calculated as the number of target keywords in the query
+# #     :param query:
+# #     :param target_keywords:
+# #     :return:
+# #     """
+# #     fitness = 0
+# #     for keyword in target_keywords:
+# #         if keyword in query:
+# #             fitness += 1
+# #     return fitness
+# #
+# # # Perform web search and scrape results
+# # def perform_search(query):
+# #     """
+# #     Simulates an internet search by sending a GET request to a search engine(e.g. google)
+# #
+# #     :param query:
+# #     :return:
+# #     """
+# #     url = f"https://www.duckduckgo.com/?q={query}"
+# #     headers = {"User-Agent": "Mozilla/5.0"}
+# #     response = requests.get(url, headers=headers)
+# #     soup = BeautifulSoup(response.text, "html.parser")
+# #
+# #     # Scrape the title of the search results
+# #     titles = [title.text for title in soup.find_all("h2")]
+# #     return titles
+# #
+# # # generate the initial population of the random queries
+# # def generate_population(size, length):
+# #     population = []
+# #     for _ in range(size):
+# #         quest = ''.join(random.choices(string.ascii_lowercase + " ", k=length))
+# #         population.append(query.strip())
+# #     return population
+# #
+# # # Crossover : Combine the parts of two queries to generate offspring
+# # def crossover(parent1, parent2):
+# #     split = random.randit(1, len(parent1) - 1)
+# #     child1 = parent1
 #
-# import requests
-# from bs4 import BeautifulSoup
 #
-# # Define fitness function: Evaluate the relevance of a search query
-# def evaluate_fitness(query, target_keywords):
-#     """
-#     Fitness is calculated as the number of target keywords in the query
-#     :param query:
-#     :param target_keywords:
-#     :return:
-#     """
-#     fitness = 0
-#     for keyword in target_keywords:
-#         if keyword in query:
-#             fitness += 1
-#     return fitness
-#
-# # Perform web search and scrape results
-# def perform_search(query):
-#     """
-#     Simulates an internet search by sending a GET request to a search engine(e.g. google)
-#
-#     :param query:
-#     :return:
-#     """
-#     url = f"https://www.duckduckgo.com/?q={query}"
-#     headers = {"User-Agent": "Mozilla/5.0"}
-#     response = requests.get(url, headers=headers)
-#     soup = BeautifulSoup(response.text, "html.parser")
-#
-#     # Scrape the title of the search results
-#     titles = [title.text for title in soup.find_all("h2")]
-#     return titles
-#
-# # generate the initial population of the random queries
-# def generate_population(size, length):
-#     population = []
-#     for _ in range(size):
-#         quest = ''.join(random.choices(string.ascii_lowercase + " ", k=length))
-#         population.append(query.strip())
-#     return population
-#
-# # Crossover : Combine the parts of two queries to generate offspring
-# def crossover(parent1, parent2):
-#     split = random.randit(1, len(parent1) - 1)
-#     child1 = parent1
+import random
+import string
+
+
+
+
 
 
 import random
 import string
+import requests
+from bs4 import BeautifulSoup
+
 
 # Fitness function: Evaluate query relevance
 def evaluate_fitness(query, target_keywords):
     fitness = sum(1 for keyword in target_keywords if keyword in query)
     return fitness
+
+
+# Perform web search and scrape results
+def perform_search(query):
+    """
+    Simulates an internet search by sending a GET request to a search engine (e.g., DuckDuckGo).
+    """
+    url = f"https://www.duckduckgo.com/?q={query}"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Scrape titles of search results
+    titles = [title.text for title in soup.find_all("h2")]
+    return titles
+
 
 # Generate initial population with hints of target keywords
 def generate_population(size, target_keywords):
