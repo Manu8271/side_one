@@ -150,6 +150,6 @@ def genetic_algorithm(target_keywords, population_size=10, generations=50, mutat
 
 # Example usage
 if __name__ == "__main__":
-    target_keywords = ["machine", "learning", "algorithms"]
+    target_keywords = ["Machine", "Learning", "Algorithms"]
     best_query = genetic_algorithm(target_keywords, population_size=20, generations=100)
     print("\nFinal Optimized Search Query:", best_query)
